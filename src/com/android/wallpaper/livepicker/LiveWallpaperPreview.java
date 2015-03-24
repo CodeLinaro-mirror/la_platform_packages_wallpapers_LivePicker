@@ -160,7 +160,7 @@ public class LiveWallpaperPreview extends Activity {
         LayoutInflater inflater = LayoutInflater.from(this);
         TextView content = (TextView) inflater.inflate(R.layout.live_wallpaper_loading, null);
 
-        mDialog = new Dialog(this, android.R.style.Theme_Black);
+        mDialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar);
 
         Window window = mDialog.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
