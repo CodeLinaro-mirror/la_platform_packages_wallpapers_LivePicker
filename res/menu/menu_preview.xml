@@ -23,12 +23,6 @@
         android:title="@string/configure_wallpaper"/>
 
     <item
-        android:id="@+id/set_wallpaper"
-        android:title="@string/set_live_wallpaper"
-        android:showAsAction="always|withText"
-        android:actionLayout="@layout/set_wallpaper_action"/>
-
-    <item
         android:id="@+id/delete_wallpaper"
         android:icon="@drawable/ic_delete_white_24dp"
         android:showAsAction="ifRoom"
