@@ -20,13 +20,13 @@ import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.service.wallpaper.WallpaperService;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -52,6 +52,7 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
         }
 
         ComponentName comp = (ComponentName)obj;
+        WallpaperInfo currentWallpaper = WallpaperManager.getInstance(this).getWallpaperInfo();
 
         // Get the information about this component.  Implemented this way
         // to not allow us to direct the caller to a service that is not a
@@ -72,7 +73,8 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
                         finish();
                         return;
                     }
-                    initUI(info, getDeleteAction(ri.serviceInfo));
+                    initUI(info, getDeleteAction(ri.serviceInfo,
+                        (currentWallpaper == null) ? null : currentWallpaper.getServiceInfo()));
                     return;
                 }
             }
@@ -83,9 +85,12 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
     }
 
     @Nullable
-    private String getDeleteAction(@NonNull ServiceInfo serviceInfo) {
-        if (!isPackagePreInstalled(serviceInfo.applicationInfo)) {
-            Log.d(TAG, "This wallpaper is not pre-installed.");
+    private String getDeleteAction(@NonNull ServiceInfo serviceInfo,
+        @Nullable ServiceInfo currentService) {
+        // STOPSHIP: Check this wallpaper is pre-installed before providing delete action.
+
+        // A currently set Live wallpaper should not be deleted.
+        if (currentService != null && TextUtils.equals(serviceInfo.name, currentService.name)) {
             return null;
         }
 
@@ -94,12 +99,5 @@ public class LiveWallpaperChange extends LiveWallpaperPreview {
             return metaData.getString(KEY_ACTION_DELETE_LIVE_WALLPAPER);
         }
         return null;
-    }
-
-    private boolean isPackagePreInstalled(ApplicationInfo info) {
-        if (info != null && (info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-            return true;
-        }
-        return false;
     }
 }

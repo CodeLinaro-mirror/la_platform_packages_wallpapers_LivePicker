@@ -15,57 +15,67 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/page_info"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/preview_attribution_pane_horizontal_padding"
-    android:paddingVertical="@dimen/preview_attribution_pane_vertical_padding">
+    android:paddingHorizontal="@dimen/preview_attribution_pane_horizontal_padding">
+
+    <Space
+        android:id="@+id/preview_attribution_pane_title_spacer"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/preview_attribution_pane_inner_spacer_height"/>
 
     <TextView
         android:id="@+id/preview_attribution_pane_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
+        android:minHeight="@dimen/preview_attribution_pane_title_height"
         android:ellipsize="end"
         android:forceHasOverlappingRendering="false"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:singleLine="true"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="@dimen/abc_text_size_subhead_material"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.SearchResult.Title"
         android:visibility="gone"/>
 
     <TextView
         android:id="@+id/preview_attribution_pane_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/preview_attribution_pane_author_height"
         android:layout_marginTop="@dimen/preview_attribution_pane_author_top_margin"
         android:forceHasOverlappingRendering="false"
-        android:gravity="center_horizontal"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:textColor="?android:attr/textColorPrimary"
+        android:gravity="center"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
         android:visibility="gone"/>
 
     <TextView
         android:id="@+id/preview_attribution_pane_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/preview_attribution_pane_description_top_margin"
+        android:minHeight="@dimen/preview_attribution_pane_description_height"
         android:forceHasOverlappingRendering="false"
         android:gravity="center_horizontal"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:textSize="@dimen/abc_text_size_caption_material"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Caption"
         android:visibility="gone"/>
+
+    <Space
+        android:id="@+id/preview_attribution_pane_spacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/preview_attribution_pane_inner_spacer_height"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="@dimen/preview_attribution_pane_explore_top_margin"
+        android:layout_marginBottom="@dimen/preview_attribution_pane_button_bottom_margin"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/preview_attribution_pane_explore_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/LivePicker.Button.Outlined"
+            style="@style/OutlinedButtonStyle"
             android:text="@string/explore_further"
             android:visibility="gone"/>
 
@@ -76,11 +86,11 @@
             android:layout_weight="1"
             android:visibility="gone"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/preview_attribution_pane_set_wallpaper_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/LivePicker.Button.Colored"
+            style="@style/ButtonStyle"
             android:text="@string/set_live_wallpaper"/>
 
     </LinearLayout>
